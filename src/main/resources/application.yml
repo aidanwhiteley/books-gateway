@@ -1,0 +1,10 @@
+
+books:
+  gateway:
+    uri: https://cloudybookclub.com
+    read-only-apis-path: /api/**
+    update-apis-path: /secure/api/**
+
+logging:
+  level:
+    root: debug
