@@ -7,4 +7,31 @@ books:
 
 logging:
   level:
-    root: debug
+    root: warn
+    org:
+      springframework:
+        boot:
+          web:
+            embedded:
+              netty:
+                NettyWebServer: info
+        cloud:
+          gateway:
+            handler:
+              FilteringWebHandler: debug
+    com:
+      aidan:
+        books: info
+
+hystrix:
+  command:
+    readCommand:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 5000
+    updateCommand:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 10000

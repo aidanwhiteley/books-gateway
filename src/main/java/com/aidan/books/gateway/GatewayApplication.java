@@ -16,21 +16,4 @@ public class GatewayApplication {
 		SpringApplication.run(GatewayApplication.class, args);
 	}
 
-	// Based on https://spring.io/guides/gs/gateway/
-
-	@Bean
-	public RouteLocator booksRoutes(RouteLocatorBuilder builder, RoutesConfigProperties routesConfigProperties) {
-		return builder.routes()
-				.route(p -> p
-						.path(routesConfigProperties.getReadOnlyApisPath())
-						.filters(f -> f.addRequestHeader("Hello", "ReadOnly"))
-						.uri(routesConfigProperties.getUri()))
-				.route(p -> p
-						.path(routesConfigProperties.getUpdateApisPath())
-						.filters(f -> f.hystrix(config -> config.setName("myupdatecmd")))
-						.uri(routesConfigProperties.getUri()))
-						// not setting setFallbackUri - and HTTP 504 wil do nicely
-				.build();
-	}
-
 }
