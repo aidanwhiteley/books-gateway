@@ -5,23 +5,16 @@ books:
     read-only-apis-path: /api/**
     update-apis-path: /secure/api/**
 
-logging:
-  level:
-    root: debug
-    org:
-      springframework:
-        boot:
-          web:
-            embedded:
-              netty:
-                NettyWebServer: info
-        cloud:
-          gateway:
-            handler:
-              FilteringWebHandler: debug
-    com:
-      aidan:
-        books: info
+    readOnlyThrottleCapacity: 100
+    readOnlyThrottleRefillTokens: 20
+    readOnlyThrottleRefillPeriod: 20
+    readOnlyThrottleRefillTimeUnit: SECONDS
+
+
+    updateThrottleCapacity: 20
+    updateThrottleRefillTokens: 10
+    updateThrottleRefillPeriod: 30
+    updateThrottleRefillTimeUnit: SECONDS
 
 hystrix:
   command:
