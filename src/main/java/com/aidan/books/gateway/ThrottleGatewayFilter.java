@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-package org.springframework.cloud.gateway.sample;
+package com.aidan.books.gateway;
 
 import java.util.concurrent.TimeUnit;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.isomorphism.util.TokenBucket;
 import org.isomorphism.util.TokenBuckets;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import reactor.core.publisher.Mono;
 
 import org.springframework.cloud.gateway.filter.GatewayFilter;
@@ -33,38 +33,44 @@ import org.springframework.web.server.ServerWebExchange;
  * Sample throttling filter. See https://github.com/bbeck/token-bucket
  *
  * Copied into this project from https://github.com/spring-cloud/spring-cloud-gateway/tree/master/spring-cloud-gateway-sample
- * and then amended for very basic in memory throttling that is sufficient for this project.
+ * and then amended for the very basic in memory throttling that is sufficient for this project.
  */
 public class ThrottleGatewayFilter implements GatewayFilter {
 
-    private static final Log log = LogFactory.getLog(ThrottleGatewayFilter.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ThrottleGatewayFilter.class);
 
     final TokenBucket tokenBucket;
+    final String throttleName;
 
-    public ThrottleGatewayFilter(int capacity, int refillTokens, int refillPeriod, TimeUnit refillUnit) {
+    public ThrottleGatewayFilter(int capacity, int refillTokens, int refillPeriod, TimeUnit refillUnit, String thottleName) {
         this.tokenBucket = TokenBuckets.builder().withCapacity(capacity)
                 .withFixedIntervalRefillStrategy(refillTokens, refillPeriod, refillUnit)
                 .build();
+        this.throttleName = thottleName;
     }
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
 
-         // TODO: get a token bucket for a key
         logDebugInfo();
+
         boolean consumed = tokenBucket.tryConsume();
         if (consumed) {
             return chain.filter(exchange);
         }
+
+        LOGGER.warn("{} throttle triggered. Seconds to next throttle refresh {}.",
+                throttleName, tokenBucket.getDurationUntilNextRefill(TimeUnit.SECONDS));
         exchange.getResponse().setStatusCode(HttpStatus.TOO_MANY_REQUESTS);
         return exchange.getResponse().setComplete();
     }
 
     private void logDebugInfo() {
-        if (log.isDebugEnabled()) {
-            log.debug("Thottle capacity: " + tokenBucket.getCapacity());
-            log.debug("Thottle tokens: " + tokenBucket.getNumTokens());
-            log.debug("Thottle seconds to next bucket refill: " + tokenBucket.getDurationUntilNextRefill(TimeUnit.SECONDS));
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("{} thottle capacity: {}", throttleName, tokenBucket.getCapacity());
+            LOGGER.debug("{} thottle tokens: {}", throttleName, tokenBucket.getNumTokens());
+            LOGGER.debug("{} thottle seconds to next bucket refill: {}", throttleName,
+                    tokenBucket.getDurationUntilNextRefill(TimeUnit.SECONDS));
         }
     }
 

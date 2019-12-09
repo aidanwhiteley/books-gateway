@@ -1,8 +1,6 @@
 package com.aidan.books.gateway;
 
 import com.netflix.hystrix.exception.HystrixTimeoutException;
-import io.netty.handler.codec.http.HttpResponse;
-import io.netty.handler.codec.http.HttpResponseStatus;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.http.HttpStatus;
@@ -32,7 +30,7 @@ public class FallbackRoute {
 
     @Data
     @AllArgsConstructor
-    class ErrorMessage {
+    static class ErrorMessage {
         private String msg;
         private int code;
     }
