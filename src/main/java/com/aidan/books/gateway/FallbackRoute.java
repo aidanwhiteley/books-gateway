@@ -18,7 +18,7 @@ public class FallbackRoute {
 
     @RequestMapping("/fallback")
     public Mono<ErrorMessage> fallback(ServerWebExchange serverWebExchange) {
-        String errMsg = "Unknown error - Pete Tong gone it has";
+        String errMsg = "Unknown error - Tong, Pete gone it has";
         HttpStatus statusCode = HttpStatus.INTERNAL_SERVER_ERROR;
 
         if (serverWebExchange.getAttribute(HYSTRIX_EXECUTION_EXCEPTION_ATTR) instanceof HystrixTimeoutException) {

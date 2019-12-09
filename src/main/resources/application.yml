@@ -7,7 +7,7 @@ books:
 
 logging:
   level:
-    root: warn
+    root: debug
     org:
       springframework:
         boot:
