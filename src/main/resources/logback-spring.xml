@@ -5,7 +5,7 @@
     <logger name="org.springframework" level="WARN"/>
     <logger name="org.springframework.boot.web.embedded.netty.NettyWebServer" level="INFO"/>
     <logger name="org.springframework.cloud.gateway.handler.FilteringWebHandler" level="WARN"/>
-    <logger name="com.aidan.books.gateway.ThrottleGatewayFilter" level="WARN"/>
+    <logger name="com.aidanwhiteley.books.gateway.ThrottleGatewayFilter" level="WARN"/>
     <logger name="com.aidanwhiteley.books.gateway" level="WARN" />
 
 </configuration>

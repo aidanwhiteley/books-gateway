@@ -1,4 +1,4 @@
-package com.aidan.books.gateway;
+package com.aidanwhiteley.books.gateway;
 
 import com.netflix.hystrix.exception.HystrixTimeoutException;
 import lombok.AllArgsConstructor;

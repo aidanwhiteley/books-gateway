@@ -1,4 +1,4 @@
-package com.aidan.books.gateway;
+package com.aidanwhiteley.books.gateway;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

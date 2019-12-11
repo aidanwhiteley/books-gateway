@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.aidan.books.gateway;
+package com.aidanwhiteley.books.gateway;
 
 import java.util.concurrent.TimeUnit;
 

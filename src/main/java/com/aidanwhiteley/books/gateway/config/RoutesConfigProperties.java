@@ -1,4 +1,4 @@
-package com.aidan.books.gateway.config;
+package com.aidanwhiteley.books.gateway.config;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;

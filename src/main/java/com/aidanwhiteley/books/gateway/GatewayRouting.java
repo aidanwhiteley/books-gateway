@@ -1,6 +1,6 @@
-package com.aidan.books.gateway;
+package com.aidanwhiteley.books.gateway;
 
-import com.aidan.books.gateway.config.RoutesConfigProperties;
+import com.aidanwhiteley.books.gateway.config.RoutesConfigProperties;
 import org.springframework.cloud.gateway.route.RouteLocator;
 import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
 import org.springframework.context.annotation.Bean;
