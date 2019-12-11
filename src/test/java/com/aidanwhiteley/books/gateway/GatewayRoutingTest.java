@@ -14,8 +14,7 @@ import static com.github.tomakehurst.wiremock.client.WireMock.*;
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
         properties = {"books.gateway.uri=http://localhost:${wiremock.server.port}",
-                "hystrix.command.readCommand.execution.isolation.thread.timeoutInMilliseconds=500",
-                "books.gateway.readOnlyThrottleCapacity=5"})
+                "hystrix.command.readCommand.execution.isolation.thread.timeoutInMilliseconds=500"})
 @AutoConfigureWireMock(port = 0)
 public class GatewayRoutingTest {
 
@@ -24,7 +23,6 @@ public class GatewayRoutingTest {
 
     @Test
     public void shouldFindValidRouteOk() {
-        // Basing test on https://spring.io/guides/gs/gateway/
 
         stubFor(get(urlEqualTo("/api/books"))
                 .willReturn(aResponse()
@@ -57,7 +55,7 @@ public class GatewayRoutingTest {
     public void shouldFailOnSlowResponse() {
         stubFor(get(urlEqualTo("/api/books"))
                 .willReturn(aResponse()
-                        .withFixedDelay(2000)));
+                        .withFixedDelay(5000)));
 
         webClient
                 .get().uri("/api/books")
@@ -66,13 +64,18 @@ public class GatewayRoutingTest {
     }
 
     @Test
-    public void shouldFailOnTooManyRequests() {
-
-    }
-
-    @Test
     public void shouldFindUpdateApiRouteOk() {
+        stubFor(get(urlEqualTo("/secure/api/user"))
+                .willReturn(aResponse()
+                        .withBody("{\"users\":{\"user\":\"Jim Bowen\"}}")
+                        .withHeader("Content-Type", "application/json")));
 
+        webClient
+                .get().uri("/secure/api/user")
+                .exchange()
+                .expectStatus().isOk()
+                .expectBody()
+                .jsonPath("$.users.user").isEqualTo("Jim Bowen");
     }
 
 }
