@@ -4,8 +4,7 @@ import com.netflix.hystrix.exception.HystrixTimeoutException;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
@@ -15,7 +14,7 @@ import static org.springframework.cloud.gateway.support.ServerWebExchangeUtils.H
 @RestController
 public class FallbackRoute {
 
-    @RequestMapping(value = "/fallback", method = RequestMethod.GET)
+    @GetMapping(value = "/fallback")
     public Mono<ErrorMessage> fallback(ServerWebExchange serverWebExchange) {
         String errMsg = "Unknown error - Tong, Pete gone it has";
         HttpStatus statusCode = HttpStatus.INTERNAL_SERVER_ERROR;

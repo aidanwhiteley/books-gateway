@@ -16,10 +16,10 @@ import static com.github.tomakehurst.wiremock.client.WireMock.*;
         properties = {"books.gateway.uri=http://localhost:${wiremock.server.port}",
                 "books.gateway.readOnlyThrottleCapacity=5"})
 @AutoConfigureWireMock(port = 0)
-/**
- * The throttling tests are in this seperate class to ensure that the test below that uses
- * up all the throttle "tokens" doesnt then affect the other gateway routing tests
- * (as a new Spring context is created for each test class).
+/*
+  The throttling tests are in this seperate class to ensure that the test below that uses
+  up all the throttle "tokens" doesnt then affect the other gateway routing tests
+  (as a new Spring context is created for each test class).
  */
 public class GatewayRoutingThottlingTest {
 
