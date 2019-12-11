@@ -31,10 +31,10 @@ public class GatewayRouting {
                                 hystrix(config -> config.setName("updateCommand").
                                         setFallbackUri("forward:/fallback")).
                                 filter(new ThrottleGatewayFilter(
-                                    routesConfigProperties.getReadOnlyThrottleCapacity(),
-                                    routesConfigProperties.getReadOnlyThrottleRefillTokens(),
-                                    routesConfigProperties.getReadOnlyThrottleRefillPeriod(),
-                                    routesConfigProperties.getReadOnlyThrottleRefillTimeUnit(),
+                                    routesConfigProperties.getUpdateThrottleCapacity(),
+                                    routesConfigProperties.getUpdateThrottleRefillTokens(),
+                                    routesConfigProperties.getUpdateThrottleRefillPeriod(),
+                                    routesConfigProperties.getUpdateThrottleRefillTimeUnit(),
                                         "UpdateThrottle")))
                         .uri(routesConfigProperties.getUri()))
                 .build();
