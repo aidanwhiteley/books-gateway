@@ -1,13 +1,19 @@
 spring:
   application:
-    name: Books API Gateway
+    name: BooksAPIGateway
+
   profiles:
     active: default
 
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
 
 books:
   gateway:
-    uri: https://cloudybookclub.com
+    uri: lb://BooksApiService
     readOnlyApisPath: /api/**
     updateApisPath: /secure/api/**
 
