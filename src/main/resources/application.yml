@@ -11,6 +11,10 @@ spring:
         locator:
           enabled: true
 
+    loadbalancer:
+      ribbon:
+        enabled: false
+
 books:
   gateway:
     uri: lb://BooksApiService
