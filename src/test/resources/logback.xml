@@ -15,4 +15,11 @@
     <logger name="org.springframework" level="WARN"/>
     <logger name="com.aidanwhiteley.books.gateway" level="WARN"/>
 
+    <!-- Not using Netflix Archaius / config server -->
+    <logger name="com.netflix.config.sources.URLConfigurationSource" level="ERROR" />
+    <logger name="org.springframework.cloud.netflix.archaius.ArchaiusAutoConfiguration" level="ERROR" />
+
+    <!-- Not worried about using the default load balancer cache -->
+    <logger name="org.springframework.cloud.loadbalancer.config.LoadBalancerCacheAutoConfiguration" level="ERROR" />
+
 </configuration>

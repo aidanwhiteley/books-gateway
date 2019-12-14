@@ -2,18 +2,15 @@ spring:
   application:
     name: BooksAPIGateway
 
-  profiles:
-    active: test
-
   cloud:
     gateway:
       discovery:
         locator:
-          enabled: true
+          enabled: false
     service-registry:
       auto-registration:
-        enabled: true
-        register-management: off
+        enabled: false
+        register-management: false
     loadbalancer:
       ribbon:
         enabled: false    # RibbonLoadBalancerClient deprecated. This setting uses BlockingLoadBalancerClient
@@ -21,7 +18,7 @@ spring:
 # By default we disable Eureka client functionality even though it is on the classpath
 eureka:
   client:
-    enabled: true
+    enabled: false
 
 books:
   gateway:
