@@ -9,8 +9,16 @@ import org.springframework.stereotype.Component;
 @Component
 public class GatewayRouting {
 
+    // Copied in from com.aidanwhiteley.books.controller.jwt.JwtAuthenticationService in the
+    // books project - https://github.com/aidanwhiteley/books
+    public static final String JWT_COOKIE_NAME = "CLOUDY-JWT";
+    private static final String JSESSIONID_COOKIE_NAME = "JSESSIONID";
+    public static final String XSRF_HEADER_NAME = "X-XSRF-TOKEN";
+    public static final String XSRF_COOKIE_NAME = "XSRF-TOKEN";
+
     @Bean
     public RouteLocator booksRoutes(RouteLocatorBuilder builder, RoutesConfigProperties routesConfigProperties) {
+
 
         return builder.routes()
                 .route(p -> p
