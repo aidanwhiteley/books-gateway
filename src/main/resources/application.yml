@@ -19,6 +19,10 @@ spring:
         enabled: false    # RibbonLoadBalancerClient deprecated. This setting uses BlockingLoadBalancerClient
 
 eureka:
+  instance:
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+    leaseRenewalIntervalInSeconds: 5
+    lease-expiration-duration-in-seconds: 5
   client:
     enabled: true
     serviceUrl:
@@ -54,3 +58,17 @@ hystrix:
             timeoutInMilliseconds: 7000
 server:
   port: 8000
+
+management:
+  endpoints:
+    enabled-by-default: true
+    web:
+      exposure:
+        # Exposing only read only items and not large data amounts - so no heapdump, threaddump or shutdown. No project use of flyway, integrationgraph, liquibase, prometheus
+        include: auditevents, beans, caches, conditions, configprops, env, health, httptrace, info, jolokia, logfile, loggers, metrics, mappings, scheduledtasks, sessions
+  info:
+    git:
+      mode: full
+  health:
+    mail:
+      enabled: false
