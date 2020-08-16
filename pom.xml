@@ -112,6 +112,9 @@
 				<artifactId>jib-maven-plugin</artifactId>
 				<version>2.5.2</version>
 				<configuration>
+					<from>
+						<image>gcr.io/distroless/java:11</image>
+					</from>
 					<to>
 						<image>aidanwhiteley/books-gateway</image>
 					</to>
