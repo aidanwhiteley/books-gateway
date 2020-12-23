@@ -6,6 +6,6 @@
 |____/ \___/ \___/|_|\_\___/ /_/   \_\_|  |___|  \____|\__,_|\__\___| \_/\_/ \__,_|\__, |
                                                                                    |___/
 
-  Running on Spring Boot ${spring-boot.formatted-version}
+  Running on Spring Boot ${spring-boot.formatted-version} - because of a legacy Spring Cloud Hsyterix dependency
   Aidan Whiteley - https://github.com/aidanwhiteley/books-gateway
  
