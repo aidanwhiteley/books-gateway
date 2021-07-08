@@ -15,7 +15,7 @@
 	<description>A Spring Gateway for access the Books project APIs</description>
 
 	<properties>
-		<spring-cloud.version>Hoxton.SR11</spring-cloud.version>
+		<spring-cloud.version>Hoxton.SR12</spring-cloud.version>
 	</properties>
 
 	<dependencies>
